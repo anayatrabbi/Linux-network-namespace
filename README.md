@@ -1,4 +1,4 @@
-## Linux network namespace
+# Linux network namespace
 
 create two namespace called red and green
 
