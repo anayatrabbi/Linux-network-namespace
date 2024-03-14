@@ -39,16 +39,20 @@ for green namespace
 ip link set veth-green netns green
 ip link set veth-green-br0 master br0
 ```
-Now assign ip addresses to namespace interfaces
+Now assign ip addresses to namespace interfaces and up them
+For red
 ```
-ip -n dev addr add 192.168.10.1/24 dev veth-red
-ip -n dev addr add 192.168.10.2/24 dev veth-green
+sudo ip netns exec red bash
+ip addr add 192.168.10.1/24 dev veth-red
+ip link set veth-red up
 ```
-Now up all the interfaces that is connect 
+
 ```
-ip -n dev link set veth-red up
-ip -n dev link set veth-green up
+sudo ip netns exec green bash
+ip addr add 192.168.10.2/24 dev veth-green
+ip link set veth-green up
 ```
+Now also up the interfaces that is connected to bridge:
 ```
 ip link set veth-red-br0 up
 ip link set veth-prod-br0 up
